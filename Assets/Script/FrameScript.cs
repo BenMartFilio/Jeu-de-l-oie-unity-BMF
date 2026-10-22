@@ -9,6 +9,7 @@ public class FrameScript : MonoBehaviour
     [SerializeField] private int[] NextID; //C'est une liste, si la liste contient un seul élément alors ça avance, sinon ça donne un choix de direction au joueur
     [SerializeField] private int BackID;
     [SerializeField] public FrameType eventType;
+    [SerializeField] private SO_ColorIndex colorIndex;
 
     void Start()
     {
@@ -17,7 +18,9 @@ public class FrameScript : MonoBehaviour
 
     private void DefineColor()
     {
-
+        Color color = colorIndex.colourTable[eventType.colorID];
+        Material material = GetComponentInChildren<MeshRenderer>().material;
+        material.color = color;
     }
 
     public void OnPlayerInThisFrame() //Si un joueur tombe sur cette case
@@ -44,6 +47,12 @@ public class FrameScript : MonoBehaviour
         Debug.LogError("ERREUR, nextID de la frame ID : " + OrderID + " n'est pas défini.");
         return 0;
     }
+
+    public int ReturnLastID()
+    {
+        return BackID;
+    }
+
 
     public int ChoicePath()
     {

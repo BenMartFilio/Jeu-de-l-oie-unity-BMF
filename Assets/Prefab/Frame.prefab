@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: aa3ec04c764da5044990cdfcc677611a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,3 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FrameScript
   OrderID: 0
   NextID: 01000000
+  BackID: 0
+  eventType:
+    type: 0
+    colorID: 0
+    value: 0

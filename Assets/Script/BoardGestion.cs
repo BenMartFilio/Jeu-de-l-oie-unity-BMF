@@ -31,8 +31,7 @@ public class BoardGestion : MonoBehaviour
 
     public void AddToPlayerMovement(Players player, int numberOfMove)
     {
-        Debug.Log("numberofmove" + numberOfMove);
-        if (numberOfMove > 0) //A refaire et à finir, il faut faire que ceci se passe uniquement après que le joueur ait fini le premier déplacement
+        if (numberOfMove > 0)
         {
             int actualPosition = player.playerPosition;
             int positionToMove = frameInThisLevel[actualPosition].ReturnNextID();
@@ -41,9 +40,24 @@ public class BoardGestion : MonoBehaviour
         else
         {
             int actualPosition = player.playerPosition;
-            OnPlayerOnFrame(frameInThisLevel[actualPosition].eventType); //Appel pour évènement des cases
+            OnPlayerOnFrame(frameInThisLevel[actualPosition].eventType, player); //Appel pour évènement des cases
         }
     }
+
+    public void RemoveToPlayerMovement(Players player, int numberOfMove)
+    {
+        if (numberOfMove > 0)
+        {
+            int actualPosition = player.playerPosition;
+            int positionToMove = frameInThisLevel[actualPosition].ReturnLastID();
+            BackMovePlayers(player, positionToMove, numberOfMove);
+        }
+        else
+        {
+            int actualPosition = player.playerPosition;
+            OnPlayerOnFrame(frameInThisLevel[actualPosition].eventType, player); //Appel pour évènement des cases
+        }
+    } 
 
 
     public void MovePlayers(Players player, int IDFrame, int numberOfMove)
@@ -52,91 +66,97 @@ public class BoardGestion : MonoBehaviour
         player.MovePlayer(position, IDFrame, numberOfMove);
     }
 
-
-    private void OnPlayerOnFrame(FrameType frameType)
+    public void BackMovePlayers(Players player, int IDFrame, int numberOfMove)
     {
-        DoEvent(frameType);
+        Vector3 position = frameInThisLevel[IDFrame].transform.position;
+        player.BackMovePlayer(position, IDFrame, numberOfMove);
     }
 
 
-    public void DoEvent(FrameType frameType)
+    private void OnPlayerOnFrame(FrameType frameType, Players player)
+    {
+        DoEvent(frameType, player);
+    }
+
+
+    public void DoEvent(FrameType frameType, Players player)
     {
         switch (frameType.type)
         {
             case FrameEvent.EarnMoney:
-                EarnMoney(frameType.value);
+                EarnMoney(frameType.value, player);
                 break;
             case FrameEvent.LoseMoney:
-                LoseMoney(frameType.value);
+                LoseMoney(frameType.value, player);
                 break;
             case FrameEvent.MiniGameFrame:
-                MiniGameFrame();
+                MiniGameFrame(player);
                 break;
             case FrameEvent.Shop:
-                Shop();
+                Shop(player);
                 break;
             case FrameEvent.Teleport:
-                Teleport(frameType.value);
+                Teleport(frameType.value, player);
                 break;
             case FrameEvent.MoveForward:
-                MoveForward(frameType.value);
+                MoveForward(frameType.value, player);
                 break;
             case FrameEvent.MoveBackward:
-                MoveBackward(frameType.value);
+                MoveBackward(frameType.value, player);
                 break;
             case FrameEvent.AleaEvent:
-                AleaEvent();
+                AleaEvent(player);
                 break;
             case FrameEvent.NoEffect:
-                NoEffect();
+                NoEffect(player);
                 break;
         }
     }
 
-    private void EarnMoney(int montant)
+    private void EarnMoney(int montant, Players player)
     {
 
     }
 
-    private void LoseMoney(int montant)
+    private void LoseMoney(int montant, Players player)
     {
 
     }
 
-    private void MiniGameFrame() 
+    private void MiniGameFrame(Players player) 
     { 
-
+        //Faire évènement mini jeu ici
     }
 
 
-    private void Shop()
+    private void Shop(Players player)
+    {
+        //Faire évènement shop ici
+    }
+
+    private void Teleport(int frameID, Players player)
+    {
+        //Faire évènement teleport ici
+    }
+
+    private void MoveForward(int numberOfMove, Players player)
+    {
+        AddToPlayerMovement(player, numberOfMove);
+    }
+
+    private void MoveBackward(int numberofMove, Players player)
+    {
+        RemoveToPlayerMovement(player, numberofMove);
+    }
+
+
+    private void AleaEvent(Players player)
     {
 
     }
 
-    private void Teleport(int frameID)
-    {
 
-    }
-
-    private void MoveForward(int numberOfMove)
-    {
-
-    }
-
-    private void MoveBackward(int numberofMove)
-    {
-
-    }
-
-
-    private void AleaEvent()
-    {
-
-    }
-
-
-    private void NoEffect()
+    private void NoEffect(Players player)
     {
 
     }

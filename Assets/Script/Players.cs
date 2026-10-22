@@ -12,6 +12,7 @@ public class Players : MonoBehaviour
     public int playerMoney = 0;
     [SerializeField] private SO_CommonData commonDatas;
     Coroutine moveCoroutine;
+    Coroutine backMoveCoroutine;
     [SerializeField] private BoardGestion boardGestion;
     [SerializeField] private DiceAndCommonThings dice;
 
@@ -19,6 +20,12 @@ public class Players : MonoBehaviour
     {
         StartSetup();
     }
+
+    private void OnApplicationQuit()
+    {
+        commonDatas.playerDatas[playerID].isInitialized = false;
+    }
+
 
     private void StartSetup()
     {
@@ -83,6 +90,21 @@ public class Players : MonoBehaviour
         }
     }
 
+    public void BackMovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    {
+        if (backMoveCoroutine != null)
+        {
+            StopCoroutine(backMoveCoroutine);
+            backMoveCoroutine = StartCoroutine(backMovement(MoveTo, NewFrameID, numberOfMove));
+        }
+        else
+        {
+            backMoveCoroutine = StartCoroutine(backMovement(MoveTo, NewFrameID, numberOfMove));
+        }
+    }
+
+
+
     private IEnumerator movement(Vector3 MoveTo, int NewFrameID, int numberOfMove)
     {
         float tempsDeplacement = commonDatas.deplacementDuree;
@@ -101,5 +123,24 @@ public class Players : MonoBehaviour
     }
 
 
-    
+
+    private IEnumerator backMovement(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    {
+        float tempsDeplacement = commonDatas.deplacementDuree;
+        Vector3 StartPosition = transform.position;
+        float i = 0;
+        while (i < 1)
+        {
+            transform.position = Vector3.Lerp(StartPosition, MoveTo, i);
+            i = i + Time.deltaTime / tempsDeplacement;
+            yield return null;
+        }
+        transform.position = MoveTo;
+        playerPosition = NewFrameID;
+        Debug.Log(numberOfMove + "ici aussi");
+        boardGestion.RemoveToPlayerMovement(this, numberOfMove - 1);
+    }
+
+
+
 }
