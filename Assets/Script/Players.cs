@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
-    private int playerID = 0;
+    [SerializeField] private int playerID = 0;
     private int playerOrder = 0; //Ordre de lancé de dés
     public int playerPosition = 0; //Position du joueur sur le plateau
 
