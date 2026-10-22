@@ -1,45 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DiceAndCommonThings : MonoBehaviour
 {
-    private Players[] players; //référence des joueurs 
-    private Dictionary<int, Players> playersAndOrder = new Dictionary<int, Players>();
+    private Dictionary<int, Players> playersAndOrder = new Dictionary<int, Players>(); //Référence des joueurs
     [SerializeField] private SO_CommonData commonDatas;
     [SerializeField] private BoardGestion boardGestion;
+    private int nextPlayerOrder = 0;
+
 
     void Start()
     {
-        GetAllPlayers();
-    }
-
-    private void GetAllPlayers()
-    {
-        players = FindObjectsByType<Players>(FindObjectsSortMode.None); //Récupère toute la liste de joueur
-        commonDatas.playersList = players;
-        Debug.Log(players.Length); //Debug publiant le nombre de joueurs en jeu
-        DefinePlayersOrder();
     }
 
 
-    private void DefinePlayersOrder()
+    public int GetPlayers(Players player)
     {
-        int i = 1;
-        foreach (var player in players)
-        {
-            OrderDefinitionEvent(player, i);
-            i++;
-        }
-    }
-
-
-    private void OrderDefinitionEvent(Players player, int order)
-    {
+        int order = nextPlayerOrder = nextPlayerOrder+1;
         player.DefineOrder(order);
         playersAndOrder.Add(order, player);
+        return order;
     }
-
 
 
     public void ThrowDice(int playerOrderID, int numberFaceOfDice = 6) //Avec l'id du joueur à qui lancer et le nombre de face du dé à tirer

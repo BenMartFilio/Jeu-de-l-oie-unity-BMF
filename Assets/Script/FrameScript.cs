@@ -7,9 +7,17 @@ public class FrameScript : MonoBehaviour
 {
     [SerializeField] private int OrderID = 0;
     [SerializeField] private int[] NextID; //C'est une liste, si la liste contient un seul élément alors ça avance, sinon ça donne un choix de direction au joueur
+    [SerializeField] private int BackID;
+    [SerializeField] public FrameType eventType;
+
     void Start()
     {
-        
+        DefineColor();
+    }
+
+    private void DefineColor()
+    {
+
     }
 
     public void OnPlayerInThisFrame() //Si un joueur tombe sur cette case

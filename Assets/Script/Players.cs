@@ -5,16 +5,63 @@ using UnityEngine;
 
 public class Players : MonoBehaviour
 {
+    private int playerID = 0;
     private int playerOrder = 0; //Ordre de lancé de dés
     public int playerPosition = 0; //Position du joueur sur le plateau
+
+    public int playerMoney = 0;
     [SerializeField] private SO_CommonData commonDatas;
     Coroutine moveCoroutine;
     [SerializeField] private BoardGestion boardGestion;
+    [SerializeField] private DiceAndCommonThings dice;
 
     void Start()
     {
-
+        StartSetup();
     }
+
+    private void StartSetup()
+    {
+        if (commonDatas == null)
+        {
+            Debug.LogError("playerID invalide : ");
+            return;
+        }
+
+        if (playerID < 0 || playerID >= commonDatas.playerDatas.Length)
+        {
+            Debug.LogError("playerID invalide : " + playerID);
+            return;
+        }
+
+        PlayerData playerData = commonDatas.playerDatas[playerID];
+
+        if (!playerData.isInitialized)
+        {
+            playerOrder = dice.GetPlayers(this);
+
+            playerData.position = playerPosition;
+            playerData.order = playerOrder;
+            playerData.money = playerMoney;
+            playerData.isInitialized = true;
+            
+            commonDatas.playerDatas[playerID] = playerData;
+
+            
+        }
+        else
+        {
+            playerPosition = playerData.position;
+            playerOrder = playerData.order;
+            playerMoney = playerData.money;
+        }
+    }
+
+    private void EndOfGame() //à appeler à la fin du jeu ou si retour au menu pour reset les valeurs.
+    {
+        commonDatas.playerDatas[playerID].isInitialized = false;
+    }
+
 
     public void DefineOrder(int order)
     {
@@ -50,9 +97,7 @@ public class Players : MonoBehaviour
         transform.position = MoveTo;
         playerPosition = NewFrameID;
         Debug.Log(numberOfMove + "ici aussi");
-        boardGestion.AddToPlayerMovement(this, numberOfMove-1);
-
-        StopCoroutine(moveCoroutine);
+        boardGestion.AddToPlayerMovement(this, numberOfMove-1);        
     }
 
 

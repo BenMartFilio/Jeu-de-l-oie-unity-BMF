@@ -15,4 +15,16 @@ MonoBehaviour:
   deplacementDuree: 2
   playersList:
   - {fileID: 0}
-  playerDatas: []
+  playerDatas:
+  - order: 1
+    position: 0
+    isItMyTurn: 0
+    money: 0
+    inventory: 
+    isInitialized: 0
+  - order: 0
+    position: 0
+    isItMyTurn: 0
+    money: 0
+    inventory: 
+    isInitialized: 0
