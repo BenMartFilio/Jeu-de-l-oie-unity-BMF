@@ -49,6 +49,7 @@ public class Players : MonoBehaviour
         }
         transform.position = MoveTo;
         playerPosition = NewFrameID;
+        Debug.Log(numberOfMove + "ici aussi");
         boardGestion.AddToPlayerMovement(this, numberOfMove-1);
 
         StopCoroutine(moveCoroutine);

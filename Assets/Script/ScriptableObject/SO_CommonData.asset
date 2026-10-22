@@ -15,3 +15,4 @@ MonoBehaviour:
   deplacementDuree: 2
   playersList:
   - {fileID: 0}
+  playerDatas: []
