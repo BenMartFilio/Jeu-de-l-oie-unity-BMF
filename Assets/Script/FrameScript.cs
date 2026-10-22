@@ -23,10 +23,6 @@ public class FrameScript : MonoBehaviour
         material.color = color;
     }
 
-    public void OnPlayerInThisFrame() //Si un joueur tombe sur cette case
-    {
-
-    }
 
     public int ReturnFrameID()
     {
@@ -57,6 +53,6 @@ public class FrameScript : MonoBehaviour
     public int ChoicePath()
     {
         //Ici, utiliser les deux next ID et proposer au joueur le choix.
-        return 0;
+        return NextID[0];
     }
 }
