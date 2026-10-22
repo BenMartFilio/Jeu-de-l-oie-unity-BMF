@@ -31,7 +31,7 @@ public class Players : MonoBehaviour
     {
         if (commonDatas == null)
         {
-            Debug.LogError("playerID invalide : ");
+            Debug.LogError("common data invalide");
             return;
         }
 

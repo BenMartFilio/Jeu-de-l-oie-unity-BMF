@@ -42,8 +42,6 @@ public class SO_CommonData : ScriptableObject
 {
     public float deplacementDuree = 10;
 
-    public Players[] playersList;
-
     public PlayerData[] playerDatas;
 
 }

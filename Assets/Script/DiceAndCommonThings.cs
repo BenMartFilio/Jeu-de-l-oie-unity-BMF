@@ -13,6 +13,21 @@ public class DiceAndCommonThings : MonoBehaviour
 
     void Start()
     {
+        OnLoadLevel();
+    }
+
+    private void OnLoadLevel()
+    {
+        for (int i = 0; i < commonDatas.playerDatas.Length; i++) 
+        {
+            if (commonDatas.playerDatas[i].isItMyTurn)
+            {
+                nextPlayerOrder = i;
+                commonDatas.playerDatas[i].isItMyTurn = false;
+                break;
+            }
+            
+        }
     }
 
 
