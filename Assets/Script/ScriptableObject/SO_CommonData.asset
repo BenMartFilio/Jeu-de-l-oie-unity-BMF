@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea8fc19949dc2a4da311a2ea96f1dab, type: 3}
   m_Name: SO_CommonData
   m_EditorClassIdentifier: Assembly-CSharp::SO_CommonData
-  deplacementDuree: 10
-  playersList: []
+  deplacementDuree: 2
+  playersList:
+  - {fileID: 0}

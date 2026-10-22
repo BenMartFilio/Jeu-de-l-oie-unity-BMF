@@ -11,13 +11,7 @@ public class Players : MonoBehaviour
 
     void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void DefineOrder(int order)
@@ -48,11 +42,21 @@ public class Players : MonoBehaviour
         while (i < 1)
         {
             transform.position = Vector3.Lerp(StartPosition, MoveTo, i);
-            i = i + Time.deltaTime/tempsDeplacement;
+            i = i + Time.deltaTime / tempsDeplacement;
             yield return null;
         }
         transform.position = MoveTo;
         playerOrder = NewFrameID;
         StopCoroutine(moveCoroutine);
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Dé lancé");
+        }
+        
     }
 }

@@ -54,6 +54,17 @@ public class DiceAndCommonThings : MonoBehaviour
 
     public void MoveOnBoard(int numberOfMove, int playerOrderID)
     {
-        boardGestion.MovePlayers(playersAndOrder[playerOrderID], numberOfMove);
+        boardGestion.AddToPlayerMovement(playersAndOrder[playerOrderID], numberOfMove);
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Dé lancé");
+            ThrowDice(1,6);
+        }
+
     }
 }
