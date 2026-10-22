@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: commonDatas
       value: 
       objectReference: {fileID: 11400000, guid: 77249982976850440b8be164c31326fd, type: 2}
+    - target: {fileID: 2177575631266034777, guid: ffb7e2ca500ed9a48b755942591db694, type: 3}
+      propertyPath: boardGestion
+      value: 
+      objectReference: {fileID: 140171963}
     - target: {fileID: 3914879687147725248, guid: ffb7e2ca500ed9a48b755942591db694, type: 3}
       propertyPath: m_Name
       value: Player

@@ -31,18 +31,19 @@ public class BoardGestion : MonoBehaviour
 
     public void AddToPlayerMovement(Players player, int numberOfMove)
     {
-        for (int num = numberOfMove;  num > 0; num --) //A refaire et à finir, il faut faire que ceci se passe uniquement après que le joueut ait fini le premier déplacement
+        if (numberOfMove > 0) //A refaire et à finir, il faut faire que ceci se passe uniquement après que le joueut ait fini le premier déplacement
         {
             int actualPosition = player.playerPosition;
             int positionToMove = frameInThisLevel[actualPosition].ReturnNextID();
-            MovePlayers(player, positionToMove);
+            MovePlayers(player, positionToMove, numberOfMove);
         }
+        return;
     }
 
 
-    public void MovePlayers(Players player, int IDFrame)
+    public void MovePlayers(Players player, int IDFrame, int numberOfMove)
     {
         Vector3 position = frameInThisLevel[IDFrame].transform.position;
-        player.MovePlayer(position, IDFrame);
+        player.MovePlayer(position, IDFrame, numberOfMove);
     }
 }
