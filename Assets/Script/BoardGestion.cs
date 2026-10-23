@@ -29,7 +29,7 @@ public class BoardGestion : MonoBehaviour
     }
 
 
-    public void AddToPlayerMovement(Players player, int numberOfMove)
+    public void AddToPlayerMovement(Players player, int numberOfMove) //Tant que le nombre de mouvement (le nombre de case qu'il doit bouger) est supérieur à 0, alors il continue les fonctions
     {
         if (numberOfMove > 0)
         {

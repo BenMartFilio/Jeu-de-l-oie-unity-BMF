@@ -8,11 +8,11 @@ using UnityEngine.Purchasing;
 
 public class Players : MonoBehaviour
 {
-    [SerializeField] private int playerID = 0;
+    [SerializeField] private int playerID = 0; //ID unique, à changer sur chaque joueur qui est posé sur le terrain
     private int playerOrder = 0; //Ordre de lancé de dés
     public int playerPosition = 0; //Position du joueur sur le plateau
 
-    public int playerMoney = 0;
+    public int playerMoney = 0; //Argent du joueur
     [SerializeField] private SO_CommonData commonDatas;
     Coroutine moveCoroutine;
     Coroutine backMoveCoroutine;
@@ -30,11 +30,11 @@ public class Players : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        commonDatas.playerDatas[playerID].isInitialized = false;
+        commonDatas.playerDatas[playerID].isInitialized = false; //Pour reset le Scriptable Object à l'arrêt.
     }
 
 
-    private void StartSetup()
+    private void StartSetup() //Si SO_CommonDatas a des valeurs à lui donné (au rechargement de la map par exemple) alors il lui donne.
     {
         if (commonDatas == null)
         {
@@ -83,10 +83,10 @@ public class Players : MonoBehaviour
         playerOrder = order;
         Debug.LogError("je suis " + playerOrder);
         textMoney = HUD.ReturnGoodText(playerOrder);
-        MoneyChange();
+        MoneyChange(); //Permet d'update le visuel de la monnaie (sur l'écran)
     }
 
-    public void MovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    public void MovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove) //Bouge d'une case en avant
     {
         if (moveCoroutine != null)
         {
@@ -99,7 +99,7 @@ public class Players : MonoBehaviour
         }
     }
 
-    public void BackMovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    public void BackMovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove) //Bouge d'une case en arrière
     {
         if (backMoveCoroutine != null)
         {
@@ -108,13 +108,13 @@ public class Players : MonoBehaviour
         }
         else
         {
-            backMoveCoroutine = StartCoroutine(backMovement(MoveTo, NewFrameID, numberOfMove));
+            backMoveCoroutine = StartCoroutine(backMovement(MoveTo, NewFrameID, numberOfMove)); //C'est le même code que pour le move vers l'avant, sauf que ça n'appelle pas la me^me fonction à la fin, donc c'est séparé
         }
     }
 
 
 
-    private IEnumerator movement(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    private IEnumerator movement(Vector3 MoveTo, int NewFrameID, int numberOfMove) //Coroutine qui bouge le joueur
     {
         float tempsDeplacement = commonDatas.deplacementDuree;
         Vector3 StartPosition = transform.position;
@@ -133,7 +133,7 @@ public class Players : MonoBehaviour
 
 
 
-    private IEnumerator backMovement(Vector3 MoveTo, int NewFrameID, int numberOfMove)
+    private IEnumerator backMovement(Vector3 MoveTo, int NewFrameID, int numberOfMove)//Pareil que movement
     {
         float tempsDeplacement = commonDatas.deplacementDuree;
         Vector3 StartPosition = transform.position;
@@ -151,7 +151,7 @@ public class Players : MonoBehaviour
     }
 
 
-    public void MoneyChange()
+    public void MoneyChange()//Update du visuel
     {
         if (textMoney == null)
         {

@@ -16,7 +16,7 @@ public class FrameScript : MonoBehaviour
         DefineColor();
     }
 
-    private void DefineColor()
+    private void DefineColor() //Change la couleur de la case, en fonction de l'index
     {
         Color color = colorIndex.colourTable[eventType.colorID];
         Material material = GetComponentInChildren<MeshRenderer>().material;
