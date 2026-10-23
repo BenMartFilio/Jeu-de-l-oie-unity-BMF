@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Purchasing;
 
 public class Players : MonoBehaviour
 {
@@ -15,6 +18,10 @@ public class Players : MonoBehaviour
     Coroutine backMoveCoroutine;
     [SerializeField] private BoardGestion boardGestion;
     [SerializeField] private DiceAndCommonThings dice;
+
+    [SerializeField] private HUDScript HUD;
+    private TextMeshProUGUI textMoney;
+    
 
     void Start()
     {
@@ -75,6 +82,8 @@ public class Players : MonoBehaviour
         //Mettre ici l'animation d'ordre si c'est fait pas le dé etc.
         playerOrder = order;
         Debug.LogError("je suis " + playerOrder);
+        textMoney = HUD.ReturnGoodText(playerOrder);
+        MoneyChange();
     }
 
     public void MovePlayer(Vector3 MoveTo, int NewFrameID, int numberOfMove)
@@ -142,5 +151,13 @@ public class Players : MonoBehaviour
     }
 
 
+    public void MoneyChange()
+    {
+        if (textMoney == null)
+        {
+            return;
+        }
+        textMoney.text = "Joueur " + playerOrder + " : " + playerMoney + " rubis"; 
+    }
 
 }

@@ -79,7 +79,7 @@ public class BoardGestion : MonoBehaviour
     }
 
 
-    public void DoEvent(FrameType frameType, Players player)
+    public void DoEvent(FrameType frameType, Players player) //Switch entre les events des cases, qui appelle leur fonction correspondantes, suivre le même fonctionnement pour en ajouter d'autre.
     {
         switch (frameType.type)
         {
@@ -115,12 +115,13 @@ public class BoardGestion : MonoBehaviour
 
     private void EarnMoney(int montant, Players player)
     {
-
+        player.playerMoney = Mathf.Clamp(player.playerMoney + montant,0 , 200000000);
     }
 
     private void LoseMoney(int montant, Players player)
     {
-
+        player.playerMoney = Mathf.Clamp(player.playerMoney - montant, 0, 200000000);
+        player.MoneyChange();
     }
 
     private void MiniGameFrame(Players player) 

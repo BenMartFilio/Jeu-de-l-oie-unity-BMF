@@ -26,8 +26,7 @@ public class DiceAndCommonThings : MonoBehaviour
                 nextPlayerOrder = i;
                 commonDatas.playerDatas[i].isItMyTurn = false;
                 break;
-            }
-            
+            }            
         }
     }
 
