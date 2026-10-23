@@ -115,7 +115,7 @@ public class BoardGestion : MonoBehaviour
 
     private void EarnMoney(int montant, Players player)
     {
-        player.playerMoney = Mathf.Clamp(player.playerMoney + montant,0 , 200000000);
+        player.playerMoney = Mathf.Clamp(player.playerMoney + montant, 0, 200000000);
     }
 
     private void LoseMoney(int montant, Players player)

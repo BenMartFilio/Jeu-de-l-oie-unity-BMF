@@ -1,0 +1,8 @@
+Il y a 7 scripts (ou acteur sur unreal).
+Le script HUD communique avec le players pour afficher l'argent en haut à gauche.
+Au début ud jeu, player envoie sa ref à DicAndCommonThings et ce dernier détermine son "order" (int d'ordre de passage). 
+Cet order est utilisé par plusieurs fonctionnalités, notamment pour savoir à qui est le tour de lancer le dé.
+Pour le moment dans le Scriptable object (Game instance sur unreal), il y a des variables notamment de positions sur la grille, qui sont réassignées au démarage, cependant la position n'est pour le moment pas réupdate.
+BoardGestion possède les ref de toutes les "frames" (cases du plateau). Ces cases possèdent leur couleur en variable exposé (c'est un index lié à une palette, SO_ColorIndex sur unity, et MPC_Color sur unreal utilisé dans le material sur unreal).
+Chaque case a son ID, l'ID de la prochaine case, et de la case précédente (pour reculer). 
+L'ID de la prochaine case est une liste, si la liste est supérieure à 1 membre, alors ça utilise la fonction "ChoicePath", qui pour le moment renvoit le premier NextID, mais dans l'idée devrait laisser le chix au joueur (pour s'il y a plusieurs chemin).
